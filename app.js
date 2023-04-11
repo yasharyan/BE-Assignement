@@ -1,16 +1,17 @@
-const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
+require("dotenv").config();
 const express = require("express");
 const app = new express();
-const port = process.env.PORT || 8080;
-const Router = require("./router/router");
+const port = process.env.PORT || 8000;
+const cors = require("cors");
+const Router = require("./src/router/router");
 const cookieParser = require("cookie-parser");
 
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(Router);
 
 app.listen(port, () => {
-  console.log(`listing to port no. ${port}`);
+  console.log(`listing to port number. ${port}`);
 });
