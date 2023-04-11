@@ -61,7 +61,12 @@ const RegisterUser = async (req, res) => {
       return res.status(201).json({
         status: 201,
         message: "User registered Successfully",
-        data: register,
+        data: {
+          name: register.name,
+          email: register.email,
+          phone: register.phone,
+          date_of_birth: register.date_of_birth,
+        },
       });
     }
   } catch (e) {

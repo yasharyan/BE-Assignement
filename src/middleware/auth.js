@@ -6,17 +6,14 @@ const auth = async (req, res, next) => {
     const token = req.cookies.jwtoken;
     const verifyToken = jwt.verify(token, process.env.SERCETE_KEY);
     const user = await User.findOne({
-      _id: verifyToken._id,
+      _id: verifyToken.id,
     });
     if (!user) {
-      throw new Error("User not found");
+      throw new Error({ error: "User not found" });
     }
-    req.token = token;
-    req.user = user;
-    req.userId = user._id;
     next();
   } catch (e) {
-    res.status(401).send("No token provided");
+    res.status(401).send({ error: "No token provided" });
   }
 };
 

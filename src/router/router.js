@@ -9,11 +9,11 @@ router.post("/register", usrCtrl.RegisterUser);
 
 router.post("/login", usrCtrl.LoginUser);
 
-router.get("/allusersdata", usrCtrl.AllUserData);
+router.get("/allusersdata", auth, usrCtrl.AllUserData);
 
 router.patch("/reset_password", usrCtrl.ResetPassword);
 
-router.get("/authicate", auth, (req, res) => {
+router.get("/authicate", auth, async (req, res) => {
   res.send(req.user);
 });
 
