@@ -125,11 +125,20 @@ const LoginUser = async (req, res) => {
 
 const AllUserData = async (req, res) => {
   try {
-    const allData = await User.find(
-      {},
-      { _id: 1, name: 1, email: 1, phone: 1, date_of_birth: 1 }
-    );
-    res.status(200).json(allData);
+    const page = parseInt(req.query.page);
+    const size = parseInt(req.query.size);
+
+    const skip = (page - 1) * size;
+
+    const total = await User.countDocuments();
+    const users = await User.find().skip(skip).limit(size);
+
+    res.status(200).json({
+      data: users,
+      total,
+      page,
+      size,
+    });
   } catch (e) {
     console.log(e);
   }
