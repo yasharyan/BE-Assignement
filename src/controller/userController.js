@@ -50,7 +50,9 @@ const RegisterUser = async (req, res) => {
         email: register.email,
         name: register.name,
       };
-      const token = jwt.sign(payload, "mysecrettoken", { expiresIn: 36000 });
+      const token = jwt.sign(payload, process.env.SERCETE_KEY, {
+        expiresIn: 36000,
+      });
 
       res.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 100000),
@@ -88,7 +90,9 @@ const LoginUser = async (req, res) => {
       );
 
       const payload = { id: registeredUser.id };
-      const token = jwt.sign(payload, "mysecrettoken", { expiresIn: 36000 });
+      const token = jwt.sign(payload, process.env.SERCETE_KEY, {
+        expiresIn: 36000,
+      });
       res.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 1000000),
       });
@@ -155,8 +159,7 @@ const ResetPassword = async (req, res) => {
         });
       } else {
         res.send({
-          message:
-            "password's are not matching, both password and confirm password fields should be same",
+          message: "password's are not matching",
         });
       }
     } else {

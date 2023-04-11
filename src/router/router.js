@@ -11,7 +11,7 @@ router.post("/login", usrCtrl.LoginUser);
 
 router.get("/allusersdata", usrCtrl.AllUserData);
 
-router.patch("/reset_password", usrCtrl.RegisterUser);
+router.patch("/reset_password", usrCtrl.ResetPassword);
 
 router.get("/authicate", auth, (req, res) => {
   res.send(req.user);
