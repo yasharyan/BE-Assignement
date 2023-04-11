@@ -5,10 +5,6 @@ const usrCtrl = require("../controller/userController");
 
 require("../db/conn");
 
-// router.get("/", (req, res) => {
-//   res.send("Server Connected again");
-// });
-
 router.post("/register", usrCtrl.RegisterUser);
 
 router.post("/login", usrCtrl.LoginUser);
