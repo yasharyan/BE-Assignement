@@ -9,7 +9,7 @@ router.post("/register", usrCtrl.RegisterUser);
 
 router.post("/login", usrCtrl.LoginUser);
 
-router.get("/allusersdata", auth, usrCtrl.AllUserData);
+router.get("/allusersdata", usrCtrl.AllUserData);
 
 router.patch("/reset_password", usrCtrl.ResetPassword);
 
