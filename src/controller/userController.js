@@ -169,7 +169,6 @@ const ResetPassword = async (req, res) => {
         res.send({
           status: 201,
           message: "user password changed successfully",
-          // data: register,
         });
       } else {
         res.send({
