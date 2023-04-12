@@ -54,9 +54,6 @@ const RegisterUser = async (req, res) => {
         expiresIn: 36000,
       });
 
-      res.cookie("jwtoken", token, {
-        expires: new Date(Date.now() + 100000),
-      });
       await register.save();
       return res.status(201).json({
         status: 201,
@@ -66,6 +63,7 @@ const RegisterUser = async (req, res) => {
           email: register.email,
           phone: register.phone,
           date_of_birth: register.date_of_birth,
+          token,
         },
       });
     }
@@ -97,9 +95,6 @@ const LoginUser = async (req, res) => {
       const payload = { id: registeredUser.id };
       const token = jwt.sign(payload, process.env.SERCETE_KEY, {
         expiresIn: 36000,
-      });
-      res.cookie("jwtoken", token, {
-        expires: new Date(Date.now() + 1000000),
       });
       if (isMatch) {
         return res.status(200).json({
